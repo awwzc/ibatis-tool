@@ -9,7 +9,7 @@ import	${tmjn.javaBeanPropertyTypeFullPath} ;
  * @author ${javaClassBean.author}
  *
  */
-public class ${javaClassBean.name}  implements Serializable{
+public class ${javaClassBean.name}DTO  implements Serializable{
 		
 		<#list javaClassBean.tableColumnsMappingJavaPropertyBeans as tableColumnsMappingJavaPropertyBean>
 		private ${tableColumnsMappingJavaPropertyBean.javaBeanPropertyType}   ${tableColumnsMappingJavaPropertyBean.javaBeanPropertyName};
@@ -23,7 +23,7 @@ public class ${javaClassBean.name}  implements Serializable{
 		</#list>
 		
 		<#list javaClassBean.tableColumnsMappingJavaPropertyBeans as tmjn>
-		public void set${tmjn.javaBeanPropertyForSetOrGetMethodName}(${tmjn.javaBeanPropertyType  ${tmjn.javaBeanPropertyName}} ) {
+		public void set${tmjn.javaBeanPropertyForSetOrGetMethodName}(${tmjn.javaBeanPropertyType }  ${tmjn.javaBeanPropertyName} ) {
 			this.${tmjn.javaBeanPropertyName} = ${tmjn.javaBeanPropertyName};
 		}
 		</#list>

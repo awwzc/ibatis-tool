@@ -45,6 +45,7 @@
        <bean id="tableColumnDao" class="com.dao.impl.TableColumnDaoImpl">
        		<property name="dataSource" ref="dataSource" />
        		<property name="sqlMapClient" ref="sqlMapClient"/>
+       		<property name="dataBase" value="mysql" />
        </bean>
         
 </beans>  

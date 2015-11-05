@@ -9,7 +9,14 @@ public class JavaCLassBean {
 	private String author;
 	private String superClass;
 	private List<TableColumnsMappingJavaPropertyBean> tableColumnsMappingJavaPropertyBeans;
+	private String dataBase;
 	
+	public String getDataBase() {
+		return dataBase;
+	}
+	public void setDataBase(String dataBase) {
+		this.dataBase = dataBase;
+	}
 	public String getSuperClass() {
 		return superClass;
 	}
