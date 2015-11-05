@@ -13,7 +13,6 @@
 	        maxSessions="10"  
 	        maxTransactions="5"   
    		 />  
-        
-    
+    <sqlMap resource="sqlmap/sqlmap-mysql.xml"/>
     
     </sqlMapConfig>
