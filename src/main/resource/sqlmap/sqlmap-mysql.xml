@@ -4,8 +4,8 @@
 	   <typeAlias alias="mappingBean" type="com.bean.TableColumnsMappingJavaPropertyBean"/>
 	   <typeAlias alias="queryCondition" type="com.bean.QueryCondition"/>
 	   <resultMap class="mappingBean" id="mappingBeanResult">
-	   		<result property="tableColumnName" column="field" jdbcType="VARCHAR"/>
-	   		<result property="tableColumnType" column="type" jdbcType="VARCHAR"/>
+	   		<result property="tableColumnName" column="COLUMN_NAME" jdbcType="VARCHAR"/>
+	   		<result property="tableColumnType" column="COLUMN_TYPE" jdbcType="VARCHAR"/>
 	   </resultMap>
 
    <select id="query" resultMap="mappingBeanResult" parameterClass="queryCondition">
