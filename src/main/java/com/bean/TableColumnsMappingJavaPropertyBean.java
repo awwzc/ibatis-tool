@@ -7,12 +7,43 @@ package com.bean;
  * @author wuzhq
  *
  */
-public class TableColumnsMappingJavaPropertyBean {
+public class TableColumnsMappingJavaPropertyBean  {
+		private String tableName;
 		private String tableColumnName;
 		private String tableColumnType;
+		private String tableColumKey;//主键标示 0 主键，1非主键
 		private String JDBCType;
 		private String javaBeanPropertyName;
 		private String javaBeanPropertyType;
+		private String javaBeanPropertyTypeFullPath;
+		private String javaBeanPropertyForSetOrGetMethodName;
+		
+		
+		public String getJavaBeanPropertyForSetOrGetMethodName() {
+			return javaBeanPropertyForSetOrGetMethodName;
+		}
+		public void setJavaBeanPropertyForSetOrGetMethodName(
+				String javaBeanPropertyForSetOrGetMethodName) {
+			this.javaBeanPropertyForSetOrGetMethodName = javaBeanPropertyForSetOrGetMethodName;
+		}
+		public String getTableName() {
+			return tableName;
+		}
+		public void setTableName(String tableName) {
+			this.tableName = tableName;
+		}
+		public String getJavaBeanPropertyTypeFullPath() {
+			return javaBeanPropertyTypeFullPath;
+		}
+		public void setJavaBeanPropertyTypeFullPath(String javaBeanPropertyTypeFullPath) {
+			this.javaBeanPropertyTypeFullPath = javaBeanPropertyTypeFullPath;
+		}
+		public String getTableColumKey() {
+			return tableColumKey;
+		}
+		public void setTableColumKey(String tableColumKey) {
+			this.tableColumKey = tableColumKey;
+		}
 		public String getTableColumnType() {
 			return tableColumnType;
 		}

@@ -6,10 +6,17 @@
 	   <resultMap class="mappingBean" id="mappingBeanResult">
 	   		<result property="tableColumnName" column="COLUMN_NAME" jdbcType="VARCHAR"/>
 	   		<result property="tableColumnType" column="COLUMN_TYPE" jdbcType="VARCHAR"/>
+	   		<result property="tableColumKey" column="COLUMN_KEY" jdbcType="VARCHAR"/>
+	   		<result property="tableName" column="TABLE_NAME" jdbcType="VARCHAR"/>
 	   </resultMap>
 
    <select id="query" resultMap="mappingBeanResult" parameterClass="queryCondition">
-   	 select COLUMN_NAME, COLUMN_TYPE from information_schema.COLUMNS where table_name = #tableName#
+   	 select TABLE_NAME, COLUMN_NAME, substring_index(COLUMN_TYPE,"(",1) COLUMN_TYPE, 
+   	 case COLUMN_KEY 
+   	 when 'PRI' then '0'
+   	 else '1'
+   	 end  COLUMN_KEY
+   	  from information_schema.COLUMNS where table_name = #tableName#
    </select>
 
 </sqlMap>

@@ -18,6 +18,7 @@
     <log4j-verison>1.2.9</log4j-verison>
     <commons-dbcp>1.4</commons-dbcp>
     <org.freemarker>2.3.20</org.freemarker>
+    <javax.servlet>2.5</javax.servlet>
   </properties>
 
   <dependencies>
@@ -93,7 +94,13 @@
 	        <artifactId>freemarker</artifactId>
 	        <version>2.3.20</version>
        </dependency>
-        
+       <dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>servlet-api</artifactId>
+			<version>${javax.servlet}</version>
+			<scope>provided</scope>
+	   </dependency>
+       
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
