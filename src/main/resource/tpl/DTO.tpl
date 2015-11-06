@@ -1,8 +1,8 @@
 package ${javaClassBean.javaPackage};
 
 import java.io.Serializable;
-<#list javaClassBean.tableColumnsMappingJavaPropertyBeans as tmjn>
-import	${tmjn.javaBeanPropertyTypeFullPath} ;
+<#list javaClassBean.importJavas as importJava>
+import	${importJava} ;
 </#list>
 /**
  * 
@@ -20,12 +20,11 @@ public class ${javaClassBean.name}DTO  implements Serializable{
 		public ${tmjn.javaBeanPropertyType} get${tmjn.javaBeanPropertyForSetOrGetMethodName}() {
 			return ${tmjn.javaBeanPropertyName};
 		}
-		</#list>
 		
-		<#list javaClassBean.tableColumnsMappingJavaPropertyBeans as tmjn>
 		public void set${tmjn.javaBeanPropertyForSetOrGetMethodName}(${tmjn.javaBeanPropertyType }  ${tmjn.javaBeanPropertyName} ) {
 			this.${tmjn.javaBeanPropertyName} = ${tmjn.javaBeanPropertyName};
 		}
 		</#list>
+		
 		
 }

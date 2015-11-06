@@ -1,6 +1,7 @@
 package com.bean;
 
 import java.util.List;
+import java.util.Set;
 
 public class JavaCLassBean {
 	private String javaPackage;
@@ -11,6 +12,15 @@ public class JavaCLassBean {
 	private List<TableColumnsMappingJavaPropertyBean> tableColumnsMappingJavaPropertyBeans;
 	private String dataBase;
 	
+	private Set<String> importJavas;
+	
+	
+	public Set<String> getImportJavas() {
+		return importJavas;
+	}
+	public void setImportJavas(Set<String> importJavas) {
+		this.importJavas = importJavas;
+	}
 	public String getDataBase() {
 		return dataBase;
 	}
