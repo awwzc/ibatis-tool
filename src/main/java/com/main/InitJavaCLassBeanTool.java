@@ -7,7 +7,8 @@ import java.util.Set;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import com.bean.JavaCLassBean;
+import com.bean.javaDtoCLassBean;
+import com.bean.JavaDtoConditionClassBean;
 import com.bean.QueryCondition;
 import com.bean.TableColumnsMappingJavaPropertyBean;
 import com.constants.JavaPropertyTypeAndFullNameEnum;
@@ -26,33 +27,33 @@ public class InitJavaCLassBeanTool {
 	 * @param tableName
 	 * @param BasePackage
 	 * @param createPath
-	 * @param javaCLassBean
+	 * @param javaDtoCLassBean
 	 * @param type 生成bean的类型 1 dto ,2 Dao ,3 dao实现,4 service, 5 service 实现
 	 * @throws Exception 
 	 */
-	public static void  init(String tableName,String BasePackage,String createPath,JavaCLassBean javaCLassBean ,int type,String author,String dataBase) throws Exception{
+	public static void  init(String tableName,String BasePackage,String createPath,javaDtoCLassBean javaDtoCLassBean ,int type,String author,String dataBase) throws Exception{
 		if(1==type){
-			javaCLassBean.setDataBase(dataBase);
-			javaCLassBean.setJavaPackage(createJavaPackage(BasePackage,"DTO"));
-			javaCLassBean.setName(createJavaDTOClassBeanName(tableName,"_"));
-			javaCLassBean.setTableColumnsMappingJavaPropertyBeans(getTableColumnsMappingJavaPropertyBeans(tableName));
-			setTableColumnsMappingJavaPropertyBeanPropertyValue(javaCLassBean);
+			javaDtoCLassBean.setDataBase(dataBase);
+			javaDtoCLassBean.setJavaPackage(createJavaPackage(BasePackage,"DTO"));
+			javaDtoCLassBean.setName(createJavaDTOClassBeanName(tableName,"_"));
+			javaDtoCLassBean.setTableColumnsMappingJavaPropertyBeans(getTableColumnsMappingJavaPropertyBeans(tableName));
+			setTableColumnsMappingJavaPropertyBeanPropertyValue(javaDtoCLassBean);
 			
 		}else if(2==type){
-			javaCLassBean.setJavaPackage(createJavaPackage(BasePackage,"DAO"));
-			javaCLassBean.setName(createDAOORServiceJavaClassBeanName(createJavaDTOClassBeanName(tableName,"_"),"DAO"));
+			javaDtoCLassBean.setJavaPackage(createJavaPackage(BasePackage,"DAO"));
+			javaDtoCLassBean.setName(createDAOORServiceJavaClassBeanName(createJavaDTOClassBeanName(tableName,"_"),"DAO"));
 		}
-		javaCLassBean.setCreatePath(createPath);
-		javaCLassBean.setAuthor(author);
+		javaDtoCLassBean.setCreatePath(createPath);
+		javaDtoCLassBean.setAuthor(author);
 	}
 	
-	public static void  setTableColumnsMappingJavaPropertyBeanPropertyValue(JavaCLassBean javaCLassBean) throws Exception{
-		if(null==javaCLassBean){
+	public static void  setTableColumnsMappingJavaPropertyBeanPropertyValue(javaDtoCLassBean javaDtoCLassBean) throws Exception{
+		if(null==javaDtoCLassBean){
 			System.out.println("javaCLassBean is null!");
 			throw new Exception();
 		}
-		String dataBase = javaCLassBean.getDataBase();
-		List<TableColumnsMappingJavaPropertyBean> list = javaCLassBean.getTableColumnsMappingJavaPropertyBeans();
+		String dataBase = javaDtoCLassBean.getDataBase();
+		List<TableColumnsMappingJavaPropertyBean> list = javaDtoCLassBean.getTableColumnsMappingJavaPropertyBeans();
 		Set<String> importJavas = new HashSet<String>();
 		for(TableColumnsMappingJavaPropertyBean bean:list){
 			if("mysql".equals(dataBase)){
@@ -68,7 +69,7 @@ public class InitJavaCLassBeanTool {
 			bean.setJavaBeanPropertyTypeFullPath(JavaPropertyTypeAndFullNameEnum.getJavaBeanPropertyTypeFullName(bean.getJavaBeanPropertyType()));
 			importJavas.add(JavaPropertyTypeAndFullNameEnum.getJavaBeanPropertyTypeFullName(bean.getJavaBeanPropertyType()));
 		}
-		javaCLassBean.setImportJavas(importJavas);
+		javaDtoCLassBean.setImportJavas(importJavas);
 	}
 	
 	public static List<TableColumnsMappingJavaPropertyBean> getTableColumnsMappingJavaPropertyBeans(String tableName){
@@ -155,6 +156,11 @@ public class InitJavaCLassBeanTool {
 		result = bf.toString();
 		return result;
 	}
+	
+	public static void  initJavaDtoConditionClassBeanPropertyVals(JavaDtoConditionClassBean javaDtoConditionClassBean){
+	}
+	
+	
 	
 	
 	public static void main(String[] args) {

@@ -3,7 +3,7 @@ package com.bean;
 import java.util.List;
 import java.util.Set;
 
-public class JavaCLassBean {
+public class javaDtoCLassBean {
 	private String javaPackage;
 	private String  createPath;
 	private String  name;

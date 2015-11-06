@@ -12,7 +12,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer;
 
-import com.bean.JavaCLassBean;
+import com.bean.javaDtoCLassBean;
 
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
@@ -23,17 +23,17 @@ public class CreateFileTool {
     private static final String ENCODING = "utf-8";  
 	
 	
-	public static void createJavaFile(String tplName,JavaCLassBean javaCLassBean) throws IOException, TemplateException{
+	public static void createJavaFile(String tplName,javaDtoCLassBean javaDtoCLassBean) throws IOException, TemplateException{
 		ApplicationContext acnt = new ClassPathXmlApplicationContext("classpath:applicationContext.xml");
 		freeMarkerConfigurer = (FreeMarkerConfigurer) acnt.getBean("freemarkerConfig");
 		Template template =  freeMarkerConfigurer.getConfiguration().getTemplate(tplName);
 		Map<String,Object> param = new HashMap<String,Object>();
-		param.put("javaClassBean", javaCLassBean);
-		File outDirFile = new File(javaCLassBean.getCreatePath()); 
+		param.put("javaClassBean", javaDtoCLassBean);
+		File outDirFile = new File(javaDtoCLassBean.getCreatePath()); 
 		if(!outDirFile.exists()){  
             outDirFile.mkdir();  
         }  
-		File javaFile = toJavaFilename(outDirFile,javaCLassBean.getJavaPackage(),javaCLassBean.getName());
+		File javaFile = toJavaFilename(outDirFile,javaDtoCLassBean.getJavaPackage(),javaDtoCLassBean.getName());
 		if(null!=javaFile){
 			Writer writer = new FileWriter(javaFile);
 			template.process(param, writer);
@@ -52,7 +52,7 @@ public class CreateFileTool {
 	private static File toJavaFilename(File outDirFile, String javaPackage, String javaClassName) {  
         String packageSubPath = javaPackage.replace('.', '/');  
         File packagePath = new File(outDirFile, packageSubPath);  
-        File file = new File(packagePath, javaClassName + ".java");  
+        File file = new File(packagePath, javaClassName + "DTO.java");  
         if(!packagePath.exists()){  
             packagePath.mkdirs();  
         }  
