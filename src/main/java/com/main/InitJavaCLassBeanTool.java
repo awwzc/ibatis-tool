@@ -7,7 +7,7 @@ import java.util.Set;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import com.bean.javaDtoCLassBean;
+import com.bean.JavaDtoCLassBean;
 import com.bean.JavaDtoConditionClassBean;
 import com.bean.QueryCondition;
 import com.bean.TableColumnsMappingJavaPropertyBean;
@@ -27,33 +27,33 @@ public class InitJavaCLassBeanTool {
 	 * @param tableName
 	 * @param BasePackage
 	 * @param createPath
-	 * @param javaDtoCLassBean
+	 * @param JavaDtoCLassBean
 	 * @param type 生成bean的类型 1 dto ,2 Dao ,3 dao实现,4 service, 5 service 实现
 	 * @throws Exception 
 	 */
-	public static void  init(String tableName,String BasePackage,String createPath,javaDtoCLassBean javaDtoCLassBean ,int type,String author,String dataBase) throws Exception{
+	public static void  init(String tableName,String BasePackage,String createPath,JavaDtoCLassBean JavaDtoCLassBean ,int type,String author,String dataBase) throws Exception{
 		if(1==type){
-			javaDtoCLassBean.setDataBase(dataBase);
-			javaDtoCLassBean.setJavaPackage(createJavaPackage(BasePackage,"DTO"));
-			javaDtoCLassBean.setName(createJavaDTOClassBeanName(tableName,"_"));
-			javaDtoCLassBean.setTableColumnsMappingJavaPropertyBeans(getTableColumnsMappingJavaPropertyBeans(tableName));
-			setTableColumnsMappingJavaPropertyBeanPropertyValue(javaDtoCLassBean);
+			JavaDtoCLassBean.setDataBase(dataBase);
+			JavaDtoCLassBean.setJavaPackage(createJavaPackage(BasePackage,"DTO"));
+			JavaDtoCLassBean.setName(createJavaDTOClassBeanName(tableName,"_"));
+			JavaDtoCLassBean.setTableColumnsMappingJavaPropertyBeans(getTableColumnsMappingJavaPropertyBeans(tableName));
+			setTableColumnsMappingJavaPropertyBeanPropertyValue(JavaDtoCLassBean);
 			
 		}else if(2==type){
-			javaDtoCLassBean.setJavaPackage(createJavaPackage(BasePackage,"DAO"));
-			javaDtoCLassBean.setName(createDAOORServiceJavaClassBeanName(createJavaDTOClassBeanName(tableName,"_"),"DAO"));
+			JavaDtoCLassBean.setJavaPackage(createJavaPackage(BasePackage,"DAO"));
+			JavaDtoCLassBean.setName(createDAOORServiceJavaClassBeanName(createJavaDTOClassBeanName(tableName,"_"),"DAO"));
 		}
-		javaDtoCLassBean.setCreatePath(createPath);
-		javaDtoCLassBean.setAuthor(author);
+		JavaDtoCLassBean.setCreatePath(createPath);
+		JavaDtoCLassBean.setAuthor(author);
 	}
 	
-	public static void  setTableColumnsMappingJavaPropertyBeanPropertyValue(javaDtoCLassBean javaDtoCLassBean) throws Exception{
-		if(null==javaDtoCLassBean){
+	public static void  setTableColumnsMappingJavaPropertyBeanPropertyValue(JavaDtoCLassBean JavaDtoCLassBean) throws Exception{
+		if(null==JavaDtoCLassBean){
 			System.out.println("javaCLassBean is null!");
 			throw new Exception();
 		}
-		String dataBase = javaDtoCLassBean.getDataBase();
-		List<TableColumnsMappingJavaPropertyBean> list = javaDtoCLassBean.getTableColumnsMappingJavaPropertyBeans();
+		String dataBase = JavaDtoCLassBean.getDataBase();
+		List<TableColumnsMappingJavaPropertyBean> list = JavaDtoCLassBean.getTableColumnsMappingJavaPropertyBeans();
 		Set<String> importJavas = new HashSet<String>();
 		for(TableColumnsMappingJavaPropertyBean bean:list){
 			if("mysql".equals(dataBase)){
@@ -69,7 +69,7 @@ public class InitJavaCLassBeanTool {
 			bean.setJavaBeanPropertyTypeFullPath(JavaPropertyTypeAndFullNameEnum.getJavaBeanPropertyTypeFullName(bean.getJavaBeanPropertyType()));
 			importJavas.add(JavaPropertyTypeAndFullNameEnum.getJavaBeanPropertyTypeFullName(bean.getJavaBeanPropertyType()));
 		}
-		javaDtoCLassBean.setImportJavas(importJavas);
+		JavaDtoCLassBean.setImportJavas(importJavas);
 	}
 	
 	public static List<TableColumnsMappingJavaPropertyBean> getTableColumnsMappingJavaPropertyBeans(String tableName){
@@ -157,7 +157,21 @@ public class InitJavaCLassBeanTool {
 		return result;
 	}
 	
-	public static void  initJavaDtoConditionClassBeanPropertyVals(JavaDtoConditionClassBean javaDtoConditionClassBean){
+	public static void  initJavaDtoConditionClassBeanPropertyVals(JavaDtoConditionClassBean javaDtoConditionClassBean,JavaDtoCLassBean javaDtoCLassBean)throws Exception{
+		if(javaDtoConditionClassBean==null){
+			throw new Exception("javaDtoConditionClassBean");
+		}
+		if(null==javaDtoCLassBean){
+			throw new Exception("javaDtoConditionClassBean");
+		}
+		javaDtoConditionClassBean.setJavaDtoCLassBean(javaDtoCLassBean);
+		javaDtoConditionClassBean.setName(javaDtoCLassBean.getName()+"Condition");
+		javaDtoConditionClassBean.setJavaPackage(javaDtoCLassBean.getJavaPackage());
+		Set<String> importJavas = new HashSet<String>();
+		importJavas.add(javaDtoCLassBean.getJavaPackage()+"."+javaDtoCLassBean.getName());
+		javaDtoConditionClassBean.setImportJavas(importJavas);
+		javaDtoConditionClassBean.setAuthor(javaDtoCLassBean.getAuthor());
+		javaDtoConditionClassBean.setCreatePath(javaDtoCLassBean.getCreatePath());
 	}
 	
 	

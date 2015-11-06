@@ -6,12 +6,12 @@ package com.bean;
  *
  */
 public class JavaDtoConditionClassBean extends JavaBaseClassBean{
-	private javaDtoCLassBean javaDtoCLassBean;
-	public javaDtoCLassBean getJavaDtoCLassBean() {
+	private JavaDtoCLassBean javaDtoCLassBean;
+	public JavaDtoCLassBean getJavaDtoCLassBean() {
 		return javaDtoCLassBean;
 	}
-	public void setJavaDtoCLassBean(javaDtoCLassBean javaDtoCLassBean) {
-		javaDtoCLassBean = javaDtoCLassBean;
+	public void setJavaDtoCLassBean(JavaDtoCLassBean javaDtoCLassBean) {
+		this.javaDtoCLassBean = javaDtoCLassBean;
 	}
 	
 }
