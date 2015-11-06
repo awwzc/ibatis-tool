@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
 <sqlMap namespace="mysql">
+		
 	   <typeAlias alias="mappingBean" type="com.bean.TableColumnsMappingJavaPropertyBean"/>
 	   <typeAlias alias="queryCondition" type="com.bean.QueryCondition"/>
 	   <resultMap class="mappingBean" id="mappingBeanResult">
