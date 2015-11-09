@@ -15,6 +15,7 @@ import org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer;
 import com.bean.JavaBaseClassBean;
 import com.bean.JavaDtoCLassBean;
 import com.bean.JavaDtoConditionClassBean;
+import com.bean.SqlMapXmlBean;
 
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
@@ -37,7 +38,7 @@ public class CreateFileTool {
         } 
 		String classNameSuf = "";
 		if(javaBaseClassBean instanceof JavaDtoCLassBean){
-			classNameSuf = "DTO";
+			classNameSuf = "DTO.java";
 		}else if(javaBaseClassBean instanceof JavaDtoConditionClassBean){
 			classNameSuf = "";
 		}
@@ -66,5 +67,41 @@ public class CreateFileTool {
         }  
         return file;  
     }  
+	
+	public static void createSqlMapXmlFile(String tplName,SqlMapXmlBean sqlMapXmlBean) throws IOException, TemplateException{
+		ApplicationContext acnt = new ClassPathXmlApplicationContext("classpath:applicationContext.xml");
+		freeMarkerConfigurer = (FreeMarkerConfigurer) acnt.getBean("freemarkerConfig");
+		Template template =  freeMarkerConfigurer.getConfiguration().getTemplate(tplName);
+		Map<String,Object> param = new HashMap<String,Object>();
+		param.put("sqlMapXmlBean", sqlMapXmlBean);
+		File outDirFile = new File(sqlMapXmlBean.getCreatePath()); 
+		if(!outDirFile.exists()){  
+            outDirFile.mkdir();  
+        } 
+		File javaFile = toSqlMapXmlFilename(outDirFile,sqlMapXmlBean.getJavaPackage(),sqlMapXmlBean.getFileName());
+		if(null!=javaFile){
+			Writer writer = new FileWriter(javaFile);
+			template.process(param, writer);
+			writer.flush();  
+             System.out.println("文件生成路径：" + javaFile.getCanonicalPath());  
+               
+             writer.close();  
+		}
+		// 输出到Console控制台  
+        Writer out = new OutputStreamWriter(System.out);  
+        template.process(param, out);  
+        out.flush();  
+        out.close();  
+	}
+	
+	private static File toSqlMapXmlFilename(File outDirFile, String javaPackage, String javaClassName) {  
+        String packageSubPath = javaPackage.replace('.', '/');  
+        File packagePath = new File(outDirFile, packageSubPath);  
+        File file = new File(packagePath, javaClassName +".xml");  
+        if(!packagePath.exists()){  
+            packagePath.mkdirs();  
+        }  
+        return file;  
+    } 
 	
 }

@@ -10,6 +10,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import com.bean.JavaDtoCLassBean;
 import com.bean.JavaDtoConditionClassBean;
 import com.bean.QueryCondition;
+import com.bean.SqlMapXmlBean;
 import com.bean.TableColumnsMappingJavaPropertyBean;
 import com.constants.JavaPropertyTypeAndFullNameEnum;
 import com.constants.MysqlDataBaseEnum;
@@ -145,24 +146,24 @@ public class InitJavaCLassBeanTool {
 		return result;
 	}
 	
-	public static String createJavaPackage(String BasePackage,String packageName) throws Exception {
+	public static String createJavaPackage(String basePackage,String packageName) throws Exception {
 		String result = null;
-		if(null==BasePackage||BasePackage.length()<1){
+		if(null==basePackage||basePackage.length()<1){
 			System.out.println("BasePackage is null!");
 			throw new Exception();
 		}
 		StringBuffer bf = new StringBuffer();
-		bf.append(BasePackage).append(".").append(packageName);
+		bf.append(basePackage).append(".").append(packageName);
 		result = bf.toString();
 		return result;
 	}
 	
 	public static void  initJavaDtoConditionClassBeanPropertyVals(JavaDtoConditionClassBean javaDtoConditionClassBean,JavaDtoCLassBean javaDtoCLassBean)throws Exception{
 		if(javaDtoConditionClassBean==null){
-			throw new Exception("javaDtoConditionClassBean");
+			throw new Exception("javaDtoConditionClassBean is null");
 		}
 		if(null==javaDtoCLassBean){
-			throw new Exception("javaDtoConditionClassBean");
+			throw new Exception("javaDtoConditionClassBean is null");
 		}
 		javaDtoConditionClassBean.setJavaDtoCLassBean(javaDtoCLassBean);
 		javaDtoConditionClassBean.setName(javaDtoCLassBean.getName()+"Condition");
@@ -174,7 +175,25 @@ public class InitJavaCLassBeanTool {
 		javaDtoConditionClassBean.setCreatePath(javaDtoCLassBean.getCreatePath());
 	}
 	
-	
+	public static void initSqlMapXmlBeanPropertyVals(SqlMapXmlBean sqlMapXmlBean,JavaDtoCLassBean javaDtoCLassBean,String tableName,String basePackage)throws Exception{
+		if(sqlMapXmlBean==null){
+			throw new Exception("sqlMapXmlBean is null");
+		}
+		if(null==javaDtoCLassBean){
+			throw new Exception("javaDtoConditionClassBean is null");
+		}
+		sqlMapXmlBean.setTableName(tableName);
+		String javaDtoCLassBeanName = javaDtoCLassBean.getName();
+		sqlMapXmlBean.setAliasDtoClassFullName(javaDtoCLassBean.getJavaPackage()+javaDtoCLassBeanName);
+		sqlMapXmlBean.setAliasDtoClassName(javaDtoCLassBeanName);
+		sqlMapXmlBean.setAliasDtoOpConditionClassName(javaDtoCLassBeanName+"Condition");
+		sqlMapXmlBean.setAliasDtoOpConditionClassFullName(javaDtoCLassBean.getJavaPackage()+sqlMapXmlBean.getAliasDtoOpConditionClassName());
+		sqlMapXmlBean.setJavaDtoCLassBean(javaDtoCLassBean);
+		sqlMapXmlBean.setNameSpace(javaDtoCLassBeanName.replace(javaDtoCLassBeanName.substring(0, 1), javaDtoCLassBeanName.substring(0, 1).toLowerCase()));
+		sqlMapXmlBean.setCreatePath(javaDtoCLassBean.getCreatePath());
+		sqlMapXmlBean.setJavaPackage(createJavaPackage(basePackage, "sqlmap"));
+		sqlMapXmlBean.setFileName("sqlmap-"+javaDtoCLassBeanName.toLowerCase());
+	}
 	
 	
 	public static void main(String[] args) {
