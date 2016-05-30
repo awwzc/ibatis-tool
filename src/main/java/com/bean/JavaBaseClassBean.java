@@ -9,6 +9,16 @@ public class JavaBaseClassBean {
 	private String author;
 	private String superClass;
 	private Set<String> importJavas;
+	private Set<String> implementsInterfaces;
+	
+	
+	
+	public Set<String> getImplementsInterfaces() {
+		return implementsInterfaces;
+	}
+	public void setImplementsInterfaces(Set<String> implementsInterfaces) {
+		this.implementsInterfaces = implementsInterfaces;
+	}
 	public String getJavaPackage() {
 		return javaPackage;
 	}
