@@ -9,7 +9,7 @@ public class JavaBaseClassBean {
 	private String author;
 	private String superClass;
 	private Set<String> importJavas;
-	private Set<String> implementsInterfaces;
+	private Set<String> implementsInterfaces ;
 	
 	
 	
