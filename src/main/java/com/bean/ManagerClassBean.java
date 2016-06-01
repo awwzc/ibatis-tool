@@ -7,11 +7,24 @@ public class ManagerClassBean  extends JavaBaseClassBean{
 	private String queryConditionCLassName;
 	private String implementsServiceInterfaceName;
 	private String AntionName;
+	private String beanMapToolClassName;
+	private String resultReturnToolCLassName;
 	
 	
 	
 	
-	
+	public String getBeanMapToolClassName() {
+		return beanMapToolClassName;
+	}
+	public void setBeanMapToolClassName(String beanMapToolClassName) {
+		this.beanMapToolClassName = beanMapToolClassName;
+	}
+	public String getResultReturnToolCLassName() {
+		return resultReturnToolCLassName;
+	}
+	public void setResultReturnToolCLassName(String resultReturnToolCLassName) {
+		this.resultReturnToolCLassName = resultReturnToolCLassName;
+	}
 	public String getAntionName() {
 		return AntionName;
 	}
